@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$BBunnie</title>
+  <link rel="icon" type="image/png" href="img/bbbunnie.jpg">
+  <meta name="description" content="$BBUNNIE — Every coin had a baby. Become a parent and adopt the Baby Bunnie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff7f3;
+      --fg: #251b2e;
+      --muted: #6b5a75;
+      --brand-1: #ff8ec6;
+      --brand-2: #8ec5ff;
+      --brand-3: #ffd28e;
+      --accent: #7c5cff;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--fg);
+      /* Fullscreen background image */
+      background: url('img/bg.jpg') center center / cover no-repeat fixed;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 247, 243, 0.7);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: Fredoka, system-ui; font-weight: 800; letter-spacing: .5px; }
+    .brand img { width: 36px; height: 36px; border-radius: 50%; box-shadow: var(--shadow); object-fit: cover; }
+    .brand-title { font-size: 20px; }
+    .nav-links { display: flex; gap: 14px; flex-wrap: wrap; }
+    .nav-links a { padding: 10px 14px; border-radius: 999px; background: #fff; box-shadow: var(--shadow); color: var(--fg); font-weight: 700; font-size: 14px; }
+    .nav-links a:hover { transform: translateY(-2px); transition: transform .15s ease; }
+
+    /* Hero */
+    .hero { padding: 56px 0 32px; position: relative; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; }
+    .title {
+      font-family: Fredoka, system-ui;
+      font-size: clamp(36px, 5vw, 64px);
+      line-height: 1.02;
+      margin: 0 0 12px;
+      text-shadow: 0 2px 0 #fff;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    /* Neon title glow for ($BBUNNIE) */
+    .neon {
+      color: #ff4fc7;
+      text-shadow:
+        0 0 2px #ffffff,
+        0 0 6px #ffffff,
+        0 0 12px #ff77da,
+        0 0 22px #ff77da,
+        0 0 38px #8ec5ff,
+        0 0 60px #8ec5ff;
+      animation: neonPulse 2.6s ease-in-out infinite;
+    }
+    @keyframes neonPulse {
+      0%, 100% {
+        text-shadow:
+          0 0 2px #ffffff,
+          0 0 5px #ffffff,
+          0 0 9px #ff6fd7,
+          0 0 16px #ff6fd7,
+          0 0 28px #8ec5ff,
+          0 0 44px #8ec5ff;
+      }
+      50% {
+        text-shadow:
+          0 0 3px #ffffff,
+          0 0 8px #ffffff,
+          0 0 16px #ff8ae1,
+          0 0 28px #ff8ae1,
+          0 0 52px #8ec5ff,
+          0 0 80px #8ec5ff;
+      }
+    }
+    .subtitle { color: var(--muted); font-size: 18px; margin: 0 0 22px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px; font-weight: 800; border: 0; cursor: pointer;
+      background: linear-gradient(135deg, var(--brand-2), var(--accent)); color: #fff; box-shadow: var(--shadow);
+    }
+    .btn.secondary { background: #fff; color: var(--fg); border: 2px solid #eee; }
+    .hero-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
+    .hero-card h4 { margin: 0 0 8px; font-size: 16px; color: var(--muted); }
+    .copy-row { display: flex; gap: 8px; }
+    .copy-input { flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px dashed #e8d7ff; background: #fcfaff; font-weight: 700; }
+
+    .hero-art {
+      position: relative; aspect-ratio: 1/1; background: radial-gradient(60% 60% at 50% 45%, #ffffff 0%, #ffeef8 100%);
+      border-radius: 28px; box-shadow: var(--shadow);
+      display: grid; place-items: center; padding: 18px;
+    }
+    .hero-art img { width: 88%; height: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,.08)); }
+    .floaty { position: absolute; font-size: 28px; opacity: .9; animation: bob 6s ease-in-out infinite; }
+    .f1 { top: 8%; left: 8%; animation-delay: 0s; }
+    .f2 { bottom: 10%; right: 10%; animation-delay: .8s; }
+    .f3 { top: 12%; right: 18%; animation-delay: 1.6s; }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .section-title { font-family: Fredoka, system-ui; font-size: 32px; margin: 0 0 14px; }
+    .section-sub { color: var(--muted); margin: 0 0 24px; }
+    .grid { display: grid; gap: 16px; }
+    .cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
+    .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #fff; box-shadow: var(--shadow); font-weight: 800; font-size: 12px; }
+
+    /* Tokenomics cute bars */
+    .bar { height: 14px; border-radius: 999px; background: #f3ecff; position: relative; overflow: hidden; }
+    .bar span { position: absolute; inset: 0; background: linear-gradient(90deg, var(--brand-1), var(--brand-2)); }
+
+    /* Roadmap timeline */
+    .timeline { position: relative; }
+    .step { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
+    .dot { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-1), var(--brand-2)); box-shadow: var(--shadow); }
+    .step + .step { margin-top: 16px; }
+
+    /* Footer CTA */
+    .footer-cta { text-align: center; padding: 64px 0 80px; }
+    .small { font-size: 12px; color: var(--muted); }
+
+    /* Community panel + large buttons */
+    .community-panel {
+      background: linear-gradient(180deg, rgba(0,0,0,0.16), rgba(0,0,0,0.10));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .cta-row.center { justify-content: center; }
+    .btn.big { padding: 16px 24px; font-size: 18px; border-radius: 999px; }
+    .btn.twitter { background: linear-gradient(135deg, #7c5cff, #5dc9ff); }
+    .btn.telegram { background: linear-gradient(135deg, #00a2ff, #0077ff); }
+    /* Breathing animation for community buttons */
+    .btn.big.telegram,
+    .btn.big.twitter {
+      animation: breathe 2.8s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+    .btn.big:hover { transform: translateY(-2px) scale(1.03); transition: transform .2s ease; }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); box-shadow: var(--shadow); }
+      50% { transform: scale(1.04); box-shadow: 0 16px 40px rgba(124, 92, 255, 0.28); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn.big.telegram, .btn.big.twitter { animation: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .cols-2 { grid-template-columns: 1fr; }
+      .cols-3 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    /* Floating background emojis */
+    .emoji-field { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .emoji-field span {
+      position: absolute; font-size: 24px; opacity: .65; will-change: transform; transform: translateZ(0);
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.08));
+      animation: floaty 9s ease-in-out infinite, spin 26s linear infinite;
+    }
+    .e1 { top: 8%; left: 6%; animation-duration: 8s, 28s; animation-delay: .2s, 0s; }
+    .e2 { top: 16%; right: 10%; animation-duration: 10s, 24s; animation-delay: .8s, .2s; }
+    .e3 { top: 50%; left: 4%; animation-duration: 11s, 30s; animation-delay: .4s, .4s; }
+    .e4 { top: 72%; right: 6%; animation-duration: 9s, 22s; animation-delay: .6s, .6s; }
+    .e5 { top: 30%; left: 50%; animation-duration: 12s, 32s; animation-delay: .1s, .3s; }
+    .e6 { bottom: 6%; left: 28%; animation-duration: 13s, 27s; animation-delay: .9s, .1s; }
+    .e7 { bottom: 12%; right: 22%; animation-duration: 10s, 25s; animation-delay: .3s, .7s; }
+    @keyframes floaty { 0% { transform: translate3d(0, 0, 0) rotate(0); } 25% { transform: translate3d(8px, -16px, 0) rotate(4deg); } 50% { transform: translate3d(0, -28px, 0) rotate(0); } 75% { transform: translate3d(-8px, -16px, 0) rotate(-4deg); } 100% { transform: translate3d(0, 0, 0) rotate(0); } }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .emoji-field span { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="emoji-field" aria-hidden="true">
+    <span class="e1">✨</span>
+    <span class="e2">🥕</span>
+    <span class="e3">💎</span>
+    <span class="e4">🚀</span>
+    <span class="e5">🌸</span>
+    <span class="e6">🍼</span>
+    <span class="e7">🐾</span>
+  </div>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="img/bbbunnie.jpg" alt="Baby Bunnie">
+        <div class="brand-title">$BBunnie</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#vision">Vision</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#why">Why</a>
+        <a href="#cta">Adopt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1 class="title">BABY BUNNIE Token <span class="neon">($BBUNNIE)</span></h1>
+          <p class="subtitle">“Every coin had a baby — so does $BUNNIE.” 🐰✨</p>
+          <div class="cta-row">
+            <a class="btn" href="#cta">Adopt $BBUNNIE</a>
+            <a class="btn secondary" href="https://pump.fun" target="_blank" rel="noopener">Launch on Pump.fun ↗</a>
+          </div>
+          <div class="hero-card" style="margin-top:16px;">
+            <h4>Contract Address</h4>
+            <div class="copy-row">
+              <input id="contract" class="copy-input" value="RZuxVPVuvKas7qP5978A8jnaHjiB41UpsVLULM2pump" readonly>
+              <button class="btn" id="copy">Copy</button>
+            </div>
+            <p class="small">Inspired by cute, scrollable vibes like <a href="https://satochi.fun/" target="_blank" rel="noopener">satochi.fun</a>.</p>
+          </div>
+        </div>
+        <div class="hero-art">
+          <span class="floaty f1">✨</span>
+          <span class="floaty f2">🥕</span>
+          <span class="floaty f3">💎</span>
+          <img src="img/bbbunnie.jpg" alt="Baby Bunnie mascot">
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section id="vision">
+      <div class="container">
+        <h2 class="section-title">Vision</h2>
+        <p class="section-sub">Every coin is born; every holder becomes a “parent”. With $BBUNNIE, you’re not just acquiring a token — you’re adopting a baby – a symbol of potential, growth and shared journey. Just as every coin begins with a “baby” stage, $BBUNNIE is born, nurtured and grown by its community.</p>
+        <div class="grid cols-3">
+          <div class="card"><span class="pill">Birth & Growth</span><p style="margin:10px 0 0;">Every coin has a baby — $BBUNNIE is the baby version of $BUNNIE.</p></div>
+          <div class="card"><span class="pill">Cute & Caring</span><p style="margin:10px 0 0;">A friendly brand inviting holders to nurture their token baby.</p></div>
+          <div class="card"><span class="pill">Community Parenthood</span><p style="margin:10px 0 0;">Holders adopt, nurture and watch the baby grow together.</p></div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <span class="pill">Long-Term Growth</span>
+          <p style="margin:10px 0 0;">Babies grow — so does $BBUNNIE. Encouraging holding, participating and evolving rather than short-term flipping.</p>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <span class="pill">Launch Platform</span>
+          <p style="margin:10px 0 0;">$BBUNNIE will launch on Pump.fun’s bonding-curve, social-driven meme ecosystem for viral, rapid launches.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section id="tokenomics">
+      <div class="container">
+        <h2 class="section-title">Tokenomics</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Total Supply</h3>
+            <p style="margin:0 0 12px; font-weight:800;">1,000,000 $BBUNNIE</p>
+            <div class="bar"><span style="width:100%;"></span></div>
+            <p class="small" style="margin-top:8px;">Cute progress bar representing full supply at genesis.</p>
+          </div>
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Liquidity & Launch</h3>
+            <p style="margin:0 0 10px;">Launching on Pump.fun.</p>
+            <ul style="margin:0 0 10px 18px;">
+              <li>Bonding-curve liquidity model</li>
+              <li>Social-driven mechanics</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid cols-3" style="margin-top:16px;">
+          <div class="card">
+            <h4 style="margin:0 0 6px;">Utility & Demand Drivers</h4>
+            <p style="margin:0;">Holders are “parents” — special rewards and early adoption benefits.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin:0 0 6px;">Engagement</h4>
+            <p style="margin:0;">Baby-themed branding enables viral, social mechanics.</p>
+          </div>
+          <div class="card">
+            <h4 style="margin:0 0 6px;">Governance Potential</h4>
+            <p style="margin:0;">As baby grows, community can vote on next phases.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <h4 style="margin:0 0 6px;">Supply & Growth Management</h4>
+          <p style="margin:0;">Designed to encourage nurturing and growth rather than immediate dump.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <div class="container">
+        <h2 class="section-title">Roadmap</h2>
+        <div class="grid cols-2">
+          <div class="card timeline">
+            <div class="step">
+              <div class="dot"></div>
+              <div>
+                <h4 style="margin:0 0 4px;">Baby Stage (Launch)</h4>
+                <ul style="margin:0 0 0 18px;">
+                  <li>Reveal brand, website, token details.</li>
+                  <li>Launch on Pump.fun; grow community; adoption campaigns.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="step">
+              <div class="dot"></div>
+              <div>
+                <h4 style="margin:0 0 4px;">Toddler Stage (Growth)</h4>
+                <ul style="margin:0 0 0 18px;">
+                  <li>Introduce staking/reward mechanics for “parents”.</li>
+                  <li>Social campaigns: naming baby, growth milestones.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="step">
+              <div class="dot"></div>
+              <div>
+                <h4 style="margin:0 0 4px;">Growing Up Stage</h4>
+                <ul style="margin:0 0 0 18px;">
+                  <li>Ecosystem integrations, partnerships, governance rollout.</li>
+                  <li>Transition narrative to mature $BUNNIE.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="step">
+              <div class="dot"></div>
+              <div>
+                <h4 style="margin:0 0 4px;">Mature Stage (Sustainability)</h4>
+                <ul style="margin:0 0 0 18px;">
+                  <li>Wider utility, possible buy-back or burn mechanics.</li>
+                  <li>Community-driven decisions; global expansion.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="display:grid; place-items:center; background: radial-gradient(60% 60% at 50% 40%, #fff 0%, #fff4fa 100%);">
+            <div style="text-align:center;">
+              <div style="font-size:52px;">🐰⬆️</div>
+              <p style="margin:8px 0 0;">Baby ➜ Toddler ➜ Grown</p>
+              <p class="small">Hold, nurture, celebrate milestones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why">
+      <div class="container">
+        <h2 class="section-title">Why This Works?</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <ul style="margin:0 0 0 18px;">
+              <li>“Every coin has a baby” narrative is unique and emotionally engaging.</li>
+              <li>Positions holders as active participants caring for growth.</li>
+              <li>Pump.fun enables viral, social-driven token launches.</li>
+              <li>Playful yet strategic arc: baby → growth → maturity.</li>
+            </ul>
+          </div>
+          <div class="card" style="display:grid; place-items:center;">
+            <div style="font-size:48px;">🥕💎🚀</div>
+            <p class="small" style="margin:6px 0 0;">Cute vibes, strong community energy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="footer-cta">
+      <div class="container">
+        <h2 class="section-title" style="text-align:center;">Become a Parent</h2>
+        <p class="section-sub" style="text-align:center;">Adopt your $BBUNNIE baby today. Participate, nurture, grow. Together we build not just a token, but a life, a community and a future.</p>
+        <div class="cta-row" style="justify-content:center;">
+          <a class="btn" href="https://pump.fun/coin/RZuxVPVuvKas7qP5978A8jnaHjiB41UpsVLULM2pump?af_force_deeplink=true&mint=RZuxVPVuvKas7qP5978A8jnaHjiB41UpsVLULM2pump&source_caller=sdk&shared_by=6buo3hgV4NTq4BUotZDV2PBJDqQQ21wJwRyYtEmCMNZf&pid=af_app_invites&shortlink=tb72bng3&af_referrer_customer_id=6buo3hgV4NTq4BUotZDV2PBJDqQQ21wJwRyYtEmCMNZf&af_channel=app&af_siteid=com.batonresearch.pump&share_type=coin_share&content_type=coin&c=coin_share&af_referrer_uid=1761519190841-2223582941280790617" target="_blank" rel="noopener">Buy on Pump.fun</a>
+          <a class="btn secondary" href="#tokenomics">View Tokenomics</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center;">Community</h2>
+      <p class="section-sub" style="text-align:center;">$BBUNNIE is powered by you. Join the vibes and help the baby grow.</p>
+      <div class="community-panel">
+        <div class="grid cols-3" style="align-items:center;">
+          <div class="card" style="text-align:center; background: rgba(255,255,255,0.85);">
+            <div style="font-size:34px;">👥</div>
+            <h3 style="margin:8px 0 6px;">Growing Fast!</h3>
+            <p class="small">Active Members</p>
+          </div>
+          <div class="card" style="text-align:center; background: rgba(255,255,255,0.85);">
+            <div style="font-size:34px;">🎯</div>
+            <h3 style="margin:8px 0 6px;">24/7 Vibes!</h3>
+            <p class="small">Meme Energy</p>
+          </div>
+          <div class="card" style="text-align:center; background: rgba(255,255,255,0.85);">
+            <div style="font-size:34px;">💎</div>
+            <h3 style="margin:8px 0 6px;">Diamond Hands!</h3>
+            <p class="small">HODL Power</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row center" style="margin-top:18px;">
+        <a class="btn big telegram" href="https://t.me/+24zxp6m3O-IwOGU1" target="_blank" rel="noopener">🚀 Join Telegram</a>
+        <a class="btn big twitter" href="https://x.com/BabyBunnieCoin?t=yx0nZlsvJVelmVk8shGr5A&s=09" target="_blank" rel="noopener">✨ Follow on X</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const copyBtn = document.getElementById('copy');
+    const input = document.getElementById('contract');
+    if (copyBtn && input) {
+      copyBtn.addEventListener('click', () => {
+        input.select();
+        document.execCommand('copy');
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => copyBtn.textContent = 'Copy', 1200);
+      });
+    }
+
+    // Basic deterrents against viewing source / opening devtools
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('keydown', (e) => {
+      const key = (e.key || '').toUpperCase();
+      const ctrl = e.ctrlKey || e.metaKey; // support Cmd on macOS
+      const shift = e.shiftKey;
+
+      // Block common shortcuts: Ctrl+U, Ctrl+S, Ctrl+P
+      if (ctrl && ['U', 'S', 'P'].includes(key)) {
+        e.preventDefault();
+        return false;
+      }
+
+      // Block DevTools: F12, Ctrl+Shift+I/J/C
+      if (key === 'F12') {
+        e.preventDefault();
+        return false;
+      }
+      if (ctrl && shift && ['I', 'J', 'C'].includes(key)) {
+        e.preventDefault();
+        return false;
+      }
+    }, true);
+  </script>
+</body>
+</html>
+
+
